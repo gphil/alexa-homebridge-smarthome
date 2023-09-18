@@ -67,14 +67,12 @@ export default class LockAccessory extends BaseAccessory {
     if (value !== 0 && value !== 1) {
       throw this.invalidValueError;
     }
-    const action = mapper.mapHomeKitTargetStateToAlexaAction(value, this.Characteristic);
     return pipe(
       this.platform.alexaApi.setDeviceState(
         this.device.id,
-        'lockState',
+        'lockAction',
         {
-          'action': 'lockAction',
-          'value': 'lock'
+          'targetLockState.value': value === 0 ? 'UNLOCKED' : 'LOCKED'
         }
       ),
       TE.match(
