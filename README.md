@@ -1,8 +1,6 @@
-<p style="text-align: center;">
-    <img alt="homebridge-logo" src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
+<p align="center">
+  <img alt="homebridge-logo" src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
 </p>
-
-# Homebridge Alexa Smart Home
 
 <p align="center">
   <a href="https://github.com/joeyhage/homebridge-alexa-smarthome/blob/main/LICENSE">
@@ -23,7 +21,9 @@
     <img alt="Discord" src="https://img.shields.io/discord/432663330281226270?cacheSeconds=3600&logo=discord&color=728ED5&label=discord-channel"></a>
 </p>
 
-This is the home of the official homebridge-alexa-smarthome plugin. This plugin enables smart home device integration between HomeKit and Alexa. This allows HomeKit/Siri to control smart home devices that are connected via Amazon Alexa.
+# Homebridge Alexa Smart Home
+
+This plugin enables smart home device integration between HomeKit and Alexa which allows HomeKit/Siri to control smart home devices that are connected via Amazon Alexa.
 
 This plugin **does not** allow Alexa to control devices in HomeKit. For that, please see the [Homebridge Alexa](https://github.com/NorthernMan54/homebridge-alexa) plugin.
 
@@ -58,6 +58,19 @@ This plugin **does not** allow Alexa to control devices in HomeKit. For that, pl
 - Devices already linked to your Alexa account can be integrated with HomeKit automatically.
 - Only Amazon credentials needed to configure this plugin rather than credentials for all your devices.
 - This plugin does not store your Amazon username or password. Instead, it uses session cookies that are valid for up to 14 days.
+
+### Air quality monitors
+
+All of the following are supported depending on what your device measures:
+
+- Air quality score (Excellent / Fair / Poor)
+- Particulate matter density (PM2.5)
+- VOC Density
+- Carbon monoxide levels
+- Relative humidity percent
+- Temperature
+
+When you first add an Air Quality Monitor to HomeKit, the above measurements may appear in the Default Room but can be assigned to any room you choose.
 
 ### Echo devices
 
