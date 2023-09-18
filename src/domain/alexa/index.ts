@@ -4,6 +4,7 @@ import { Nullable } from '../index';
 export const SupportedDeviceTypes = [
   'LIGHT',
   'SWITCH',
+  'SMARTLOCK',
   'SMARTPLUG',
   'THERMOSTAT',
   'ALEXA_VOICE_ENABLED',
@@ -41,6 +42,7 @@ export interface DeviceResponse {
 }
 
 export const SupportedNamespaces = {
+  'Alexa.LockController': 'Alexa.LockController',
   'Alexa.PowerController': 'Alexa.PowerController',
   'Alexa.BrightnessController': 'Alexa.BrightnessController',
   'Alexa.TemperatureSensor': 'Alexa.TemperatureSensor',
@@ -51,6 +53,11 @@ export const SupportedNamespaces = {
 export type SupportedNamespacesType = keyof typeof SupportedNamespaces;
 
 export const SupportedActions = {
+  lock: 'lock',
+  lockState: 'lockState',
+  unlock: 'unlock',
+  lockAction: 'lockAction',
+  setLockState: 'setLockState',
   turnOn: 'turnOn',
   turnOff: 'turnOff',
   setBrightness: 'setBrightness',
