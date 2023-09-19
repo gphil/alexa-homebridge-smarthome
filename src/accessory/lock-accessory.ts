@@ -110,11 +110,9 @@ export default class LockAccessory extends BaseAccessory {
         },
         () => {
           this.updateCacheValue({
-            value: {
-              value: value === 0 ? 'UNLOCKED' : 'LOCKED'
-            },
+            value: value === 0 ? 'UNLOCKED' : 'LOCKED',
             namespace: 'Alexa.LockController',
-            name: 'lockState',
+            name: 'lockState'
           });
         },
       ),
