@@ -13,6 +13,15 @@ export const mapAlexaCurrentStateToHomeKit = (
     .with('JAMMED', constant(characteristic.LockCurrentState.JAMMED))
     .otherwise(constant(characteristic.LockCurrentState.UNKNOWN));
 
+export const mapAlexaTargetStateToHomeKit = (
+  value: CapabilityState['value'],
+  characteristic: typeof Characteristic,
+) =>
+  match(value)
+    .with('LOCKED', constant(characteristic.LockTargetState.SECURED))
+    .with('UNLOCKED', constant(characteristic.LockTargetState.UNSECURED))
+    .otherwise(constant(characteristic.LockCurrentState.UNKNOWN));
+
 export const mapHomeKitTargetStateToAlexaAction = (
   value: 0 | 1,
   characteristic: typeof Characteristic,

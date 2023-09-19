@@ -32,6 +32,7 @@ export default class LockAccessory extends BaseAccessory {
 
     this.service
       .getCharacteristic(this.platform.Characteristic.LockTargetState)
+      .onGet(this.handleTargetStateGet.bind(this))
       .onSet(this.handleTargetStateSet.bind(this));
   }
 
@@ -55,6 +56,33 @@ export default class LockAccessory extends BaseAccessory {
 
     return pipe(
       this.getState(determineCurrentState),
+      TE.match((e) => {
+        this.logWithContext('errorT', 'Get lock state', e);
+        throw this.serviceCommunicationError;
+      }, identity),
+    )();
+  }
+
+  async handleTargetStateGet(): Promise<number> {
+    const alexaNamespace: LockNamespacesType = 'Alexa.LockController';
+    const alexaValueName = 'lockState';
+    const determineTargetState = flow(
+      O.filterMap<LockState[], LockState>(
+        A.findFirst(
+          ({ name, namespace }) =>
+            namespace === alexaNamespace && name === alexaValueName,
+        ),
+      ),
+      O.map(({ value }) =>
+        mapper.mapAlexaTargetStateToHomeKit(value, this.Characteristic),
+           ),
+      O.tap((s) =>
+        O.of(this.logWithContext('debug', `Get lock state result: ${s}`)),
+           ),
+    );
+
+    return pipe(
+      this.getState(determineTargetState),
       TE.match((e) => {
         this.logWithContext('errorT', 'Get lock state', e);
         throw this.serviceCommunicationError;
