@@ -100,7 +100,7 @@ export default class LockAccessory extends BaseAccessory {
         this.device.id,
         'lockAction',
         {
-          'targetLockState.value': value === 0 ? 'UNLOCKED' : 'LOCKED'
+          'targetLockState.value': mapper.mapHomeKitTargetStateToAlexaTargetState(value)
         }
       ),
       TE.match(
@@ -110,7 +110,7 @@ export default class LockAccessory extends BaseAccessory {
         },
         () => {
           this.updateCacheValue({
-            value: value === 0 ? 'UNLOCKED' : 'LOCKED',
+            value: mapper.mapHomeKitTargetStateToAlexaTargetState(value),
             namespace: 'Alexa.LockController',
             name: 'lockState'
           });

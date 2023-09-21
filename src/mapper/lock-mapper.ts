@@ -22,11 +22,6 @@ export const mapAlexaTargetStateToHomeKit = (
     .with('UNLOCKED', constant(characteristic.LockTargetState.UNSECURED))
     .otherwise(constant(characteristic.LockCurrentState.UNKNOWN));
 
-export const mapHomeKitTargetStateToAlexaAction = (
-  value: 0 | 1,
-  characteristic: typeof Characteristic,
-): 'lock' | 'unlock' =>
-  match<0 | 1, 'lock' | 'unlock'>(value)
-    .with(characteristic.LockTargetState.SECURED, constant('lock'))
-    .with(characteristic.LockTargetState.UNSECURED, constant('unlock'))
-    .exhaustive();
+export const mapHomeKitTargetStateToAlexaTargetState = (
+  value: 0 | 1
+): 'UNLOCKED' | 'LOCKED' => value === 0 ? 'UNLOCKED' : 'LOCKED';
